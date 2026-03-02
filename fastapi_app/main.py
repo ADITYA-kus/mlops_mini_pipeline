@@ -16,11 +16,15 @@ from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer 
 nltk.download('stopwords')
 nltk.download('wordnet')    
+dagshub_token=os.getenv("DVCS3MLFLOW")
+os.environ["MLFLOW_TRACKING_USERNAME"] = dagshub_token
+os.environ["MLFLOW_TRACKING_PASSWORD"] = dagshub_token
 
+mlflow.set_tracking_uri("https://dagshub.com/ADITYA-kus/mlops_mini_pipeline.mlflow/")
 
 
 mlflow.set_tracking_uri("https://dagshub.com/ADITYA-kus/mlops_mini_pipeline.mlflow/")
-dagshub.init(repo_owner='ADITYA-kus', repo_name='mlops_mini_pipeline', mlflow=True)
+
 
 
 

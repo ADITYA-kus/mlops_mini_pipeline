@@ -2,8 +2,17 @@ import json
 import mlflow
 import dagshub
 from mlflow.tracking import MlflowClient
+import os
+
+dagshub_token=os.getenv("DVCS3MLFLOW")
+os.environ["MLFLOW_TRACKING_USERNAME"] = dagshub_token
+os.environ["MLFLOW_TRACKING_PASSWORD"] = dagshub_token
+
 mlflow.set_tracking_uri("https://dagshub.com/ADITYA-kus/mlops_mini_pipeline.mlflow/")
-dagshub.init(repo_owner='ADITYA-kus', repo_name='mlops_mini_pipeline', mlflow=True)
+
+
+
+
 
 def load_model_info(file_path: str) -> dict:
     with open(file_path, 'r') as f:

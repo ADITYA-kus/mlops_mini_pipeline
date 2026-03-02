@@ -16,9 +16,17 @@ if sys.platform == 'win32':
     except Exception:
         pass
 
+
+dagshub_token=os.getenv("DVCS3MLFLOW")
+os.environ["MLFLOW_TRACKING_USERNAME"] = dagshub_token
+os.environ["MLFLOW_TRACKING_PASSWORD"] = dagshub_token
+
+mlflow.set_tracking_uri("https://dagshub.com/ADITYA-kus/mlops_mini_pipeline.mlflow/")
+
+
 # Set up MLflow tracking URI
 mlflow.set_tracking_uri("https://dagshub.com/ADITYA-kus/mlops_mini_pipeline.mlflow/")
-dagshub.init(repo_owner='ADITYA-kus', repo_name='mlops_mini_pipeline', mlflow=True)
+
 
 def load_model(file_path):
     with open(file_path, 'rb') as f:
