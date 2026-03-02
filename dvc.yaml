@@ -1,57 +1,57 @@
 stages:
   data_ingestion:
-    cmd: python src\data_ingestion.py
+    cmd: python src/data_ingestion.py
     deps:
-    - src\data_ingestion.py
+      - src/data_ingestion.py
     outs:
-    - data\external\external_data.csv
+      - data/external/external_data.csv
     params:
-    - data_ingestion.test_size
+      - data_ingestion.test_size
 
-  preprocesing:
-    cmd: python src\preprocessing.py
+  preprocessing:
+    cmd: python src/preprocessing.py
     deps:
-    - data\external\external_data.csv
-    - src\preprocessing.py
+      - data/external/external_data.csv
+      - src/preprocessing.py
     outs:
-    - data\processed\test_processed.csv
-    - data\processed\train_processed.csv
-  features_enginnering:
-    cmd: python src\features_engineering.py
+      - data/processed/test_processed.csv
+      - data/processed/train_processed.csv
+
+  features_engineering:
+    cmd: python src/features_engineering.py
     deps:
-    - data\processed\test_processed.csv
-    - data\processed\train_processed.csv
-    - src\features_engineering.py
+      - data/processed/test_processed.csv
+      - data/processed/train_processed.csv
+      - src/features_engineering.py
     outs:
-    - data\features_store\testing_feature.csv
-    - data\features_store\training_feature.csv
+      - data/features_store/testing_feature.csv
+      - data/features_store/training_feature.csv
     params:
-    - features_engineerig.max_features
+      - features_engineering.max_features
+
   model_building:
-    cmd: python src\modeling\model_building.py
+    cmd: python src/modeling/model_building.py
     deps:
-    - data\features_store\testing_feature.csv
-    - data\features_store\training_feature.csv
-    - src\modeling\model_building.py
+      - data/features_store/testing_feature.csv
+      - data/features_store/training_feature.csv
+      - src/modeling/model_building.py
     outs:
-    - models\bow_model.pkl
+      - models/bow_model.pkl
     params:
-    - model_building.n_estimators
-    - model_building.learning_rate
+      - model_building.n_estimators
+      - model_building.learning_rate
+
   model_evaluation:
     cmd: python src/modeling/model_evaluation.py
     deps:
-    - data\features_store\testing_feature.csv
-    - models\bow_model.pkl
-    - src\modeling\model_evaluation.py
+      - data/features_store/testing_feature.csv
+      - models/bow_model.pkl
+      - src/modeling/model_evaluation.py
     outs:
-    - src\modeling\metrics.json
+      - src/modeling/metrics.json
+
   model_registry:
-    cmd: python src\modeling\model_registry.py
+    cmd: python src/modeling/model_registry.py
     deps:
-    - reports\experiment_info.json
-    - src\modeling\model_registry.py
-
-
-
-
+      - reports/experiment_info.json
+      - src/modeling/model_registry.py
