@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sentiment Prediction</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 900px; margin: 40px auto; padding: 0 16px; }
+    h1 { margin-bottom: 6px; }
+    p { color: #444; }
+    textarea { width: 100%; min-height: 160px; padding: 12px; font-size: 16px; }
+    button { padding: 10px 16px; font-size: 16px; cursor: pointer; margin-top: 10px; }
+    .card { margin-top: 18px; padding: 14px; border: 1px solid #ddd; border-radius: 10px; }
+    .result { font-size: 18px; font-weight: 700; }
+    .muted { color: #666; font-size: 13px; }
+    .back-btn { background-color: #f0f0f0; border: none; margin-top: 12px; }
+  </style>
+</head>
+<body>
+  <h1>Sentiment Prediction</h1>
+  <p>Enter text and click Predict.</p>
+
+  <!-- FastAPI route -->
+  <form action="/predict" method="post">
+    <label for="text" class="muted">Text</label>
+    <textarea id="text" name="text" placeholder="Type or paste your text here..." required></textarea>
+    <br />
+    <button type="submit">Predict</button>
+  </form>
+
+  {% if result is not none %}
+    <div class="card">
+      <div class="muted">Prediction</div>
+      <div class="result">{{ result }}</div>
+      <!-- Go Back button -->
+      <button class="back-btn" onclick="history.back()">Go Back</button>
+    </div>
+  {% endif %}
+</body>
+</html>
