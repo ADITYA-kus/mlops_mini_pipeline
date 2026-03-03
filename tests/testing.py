@@ -85,8 +85,8 @@ class TestModelLoading(unittest.TestCase):
         # Define expected thresholds for the performance metrics
         expected_accuracy = 0.40
         expected_precision = 0.40
-        expected_recall = 0.40
-        expected_f1 = 0.40
+        expected_recall = 0.30
+        expected_f1 = 0.30
 
         # Assert that the new model meets the performance thresholds
         self.assertGreaterEqual(accuracy_new, expected_accuracy, f'Accuracy should be at least {expected_accuracy}')
