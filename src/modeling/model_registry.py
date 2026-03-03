@@ -31,11 +31,11 @@ def register_model(model_name: str, model_info: dict):
     client.transition_model_version_stage(
         name=model_name,
         version=model_version.version,
-        stage="production",
+        stage="staging",
     )
     
     print("REGISTERING model_uri:", model_uri)
-    print(f"✅ Model {model_name} version {model_version.version} registered and push to production.")
+    print(f"✅ Model {model_name} version {model_version.version} registered and push to staging.")
 
 
 

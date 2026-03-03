@@ -30,3 +30,19 @@ jobs:
           DVCS3MLFLOW: ${{ secrets.DVCS3MLFLOW }}
         run: |
           dvc repro --force
+
+      - name: RUN Tests
+        env:
+           DVCS3MLFLOW: ${{ secrets.DVCS3MLFLOW }}
+        run: |
+           python -m unittest tests/testing.py
+
+      - name: promote model to prooduction
+        if: ${{ success() }}
+        env:
+            DVCS3MLFLOW: ${{ secrets.DVCS3MLFLOW }}
+        run: |
+            python src/modeling/production_trains.py
+
+
+            
