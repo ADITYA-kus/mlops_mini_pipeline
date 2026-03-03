@@ -27,22 +27,27 @@ class TestModelLoading(unittest.TestCase):
         mlflow.set_tracking_uri(f'{dagshub_url}/{repo_owner}/{repo_name}.mlflow')
 
         # Load the new model from MLflow model registry
-        cls.new_model_name = "my_logitic_regression_model"
+        cls.new_model_name = "my_logistic_regression_model"
         cls.new_model_version = cls.get_latest_model_version(cls.new_model_name)
         cls.new_model_uri = f'models:/{cls.new_model_name}/{cls.new_model_version}'
         cls.new_model = mlflow.pyfunc.load_model(cls.new_model_uri)
 
         # Load the vectorizer
-        cls.vectorizer = pickle.load(open('models/vectorizer.pkl', 'rb'))
+        cls.vectorizer = pickle.load(open(os.path.join('models', 'vectorizer.pkl'), 'rb'))
 
         # Load holdout test data
-        cls.holdout_data = pd.read_csv('data/features_store/testing_feature.csv')
+        cls.holdout_data = pd.read_csv(os.path.join('data', 'features_store', 'testing_feature.csv'))
 
     @staticmethod
-    def get_latest_model_version(model_name, stage="Staging"):
+    def get_latest_model_version(model_name):
         client = mlflow.MlflowClient()
-        latest_version = client.get_latest_versions(model_name, stages=["staging"])
-        return latest_version[0].version if latest_version else None
+        # Use search_model_versions instead of deprecated get_latest_versions
+        versions = client.search_model_versions(f"name='{model_name}'")
+        if not versions:
+            return None
+        # Sort by version number and get the latest
+        latest = max(versions, key=lambda x: int(x.version))
+        return latest.version
 
     def test_model_loaded_properly(self):
         self.assertIsNotNone(self.new_model)
