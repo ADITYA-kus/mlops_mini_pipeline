@@ -37,12 +37,12 @@ jobs:
         run: |
            python -m unittest tests/testing.py
 
-      - name: promote model to prooduction
+      - name: promote model to production
         if: ${{ success() }}
         env:
             DVCS3MLFLOW: ${{ secrets.DVCS3MLFLOW }}
         run: |
-            python src/modeling/production_trains.py
+            python src/modeling/production_trans.py
 
 
             

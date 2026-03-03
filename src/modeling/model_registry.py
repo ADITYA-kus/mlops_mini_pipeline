@@ -31,17 +31,17 @@ def register_model(model_name: str, model_info: dict):
     client.transition_model_version_stage(
         name=model_name,
         version=model_version.version,
-        stage="staging",
+        stage="production",
     )
     
     print("REGISTERING model_uri:", model_uri)
-    print(f"✅ Model {model_name} version {model_version.version} registered and push to staging.")
+    print(f"✅ Model {model_name} version {model_version.version} registered and push to production.")
 
 
 
 
 def main():
-    model_info_path = 'reports/experiment_info.json'
+    model_info_path = os.path.join('reports', 'experiment_info.json')
     model_info = load_model_info(model_info_path)
 
 
@@ -52,4 +52,6 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+
 
