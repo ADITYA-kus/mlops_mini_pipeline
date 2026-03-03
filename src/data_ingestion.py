@@ -5,7 +5,7 @@ import os
 import yaml
 def load_yaml():
     try:
-      param=yaml.safe_load(open(r'params.yaml','r'))
+      param=yaml.safe_load(open('params.yaml','r'))
       test_siz=param['data_ingestion']['test_size']
       return test_siz
     except Exception as e:
@@ -39,7 +39,7 @@ def basic_data_process(raw_data):
    
 def save_external_data(final_df):
     try:
-      final_df.to_csv(os.path.join(r'data\external','external_data.csv'))
+      final_df.to_csv(os.path.join('data', 'external', 'external_data.csv'))
     except Exception as e:
       print(f"an unexpected error occured during external data saving")
       print(e)
@@ -48,8 +48,8 @@ def save_external_data(final_df):
 
 def save_data(train_df,test_df):
     try:
-      train_df.to_csv(os.path.join(r'data\raw','train_df.csv'),index=False)
-      test_df.to_csv(os.path.join(r'data\raw','test_df.csv'),index=False)
+      train_df.to_csv(os.path.join('data', 'raw', 'train_df.csv'),index=False)
+      test_df.to_csv(os.path.join('data', 'raw', 'test_df.csv'),index=False)
     except Exception as e:
       print('An unexcepted error occured during train test data saving in raw file')
       print(e)

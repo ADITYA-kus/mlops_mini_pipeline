@@ -7,7 +7,7 @@ import yaml
 
 def load_yaml():
     try:
-       params= yaml.safe_load(open(r'params.yaml','r'))['model_building']
+       params= yaml.safe_load(open('params.yaml','r'))['model_building']
        return params
     except Exception as e:
         print(e)
@@ -35,7 +35,7 @@ def model_training(x_train, y_train,params):
 def save_model(clf):
     try:
         os.makedirs('models', exist_ok=True)
-        with open('models/bow_model.pkl', 'wb') as f:
+        with open(os.path.join('models', 'bow_model.pkl'), 'wb') as f:
             pickle.dump(clf, f)
         print("Model saved successfully.")
     except Exception as e:
@@ -44,7 +44,7 @@ def save_model(clf):
 
 def main():
     try:
-        train_features_path = 'data/features_store/training_feature.csv'
+        train_features_path = os.path.join('data', 'features_store', 'training_feature.csv')
         x_train, y_train = load_training_features(train_features_path)
         param=load_yaml()
         clf = model_training(x_train, y_train,param)

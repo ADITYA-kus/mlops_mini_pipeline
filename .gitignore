@@ -189,5 +189,5 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
-/params.yaml
+
 !*.dvc

@@ -55,10 +55,9 @@ def main():
     mlflow.set_experiment("dvc-pipeline1")
     with mlflow.start_run() as run:
         # Paths
-        model_path = 'models/bow_model.pkl'
-        test_features_path = r'data\features_store\testing_feature.csv'
-        metrics_path = 'src/modeling/metrics.json'
-        import os
+        model_path = os.path.join('models', 'bow_model.pkl')
+        test_features_path = os.path.join('data', 'features_store', 'testing_feature.csv')
+        metrics_path = os.path.join('src', 'modeling', 'metrics.json')
         PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
         model_info_path = os.path.join(PROJECT_ROOT, "reports", "experiment_info.json")
         # Load model + data

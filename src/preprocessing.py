@@ -120,8 +120,8 @@ def normalize_text(df):
         raise
 def save_processed_data(train_processed_data,test_processed_data):
      try:
-         train_processed_data.to_csv(os.path.join(r'data\processed','train_processed.csv'),index=False)
-         test_processed_data.to_csv(os.path.join(r'data\processed','test_processed.csv'),index=False)
+         train_processed_data.to_csv(os.path.join('data', 'processed', 'train_processed.csv'),index=False)
+         test_processed_data.to_csv(os.path.join('data', 'processed', 'test_processed.csv'),index=False)
          print("processed data saved successfully")
 
      except:
@@ -130,8 +130,8 @@ def save_processed_data(train_processed_data,test_processed_data):
          
 def main():
     try:
-        test_path=r'data\raw\test_df.csv'
-        train_path=r'data\raw\train_df.csv'
+        test_path=os.path.join('data', 'raw', 'test_df.csv')
+        train_path=os.path.join('data', 'raw', 'train_df.csv')
         train_df,test_df=data_load(train_path,test_path)
         
         train_processed_data = normalize_text(train_df)

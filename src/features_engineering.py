@@ -9,7 +9,7 @@ import yaml
 
 def load_yaml():
     try:
-        mx_feature=yaml.safe_load(open(r'params.yaml','r'))['features_engineerig']['max_features']
+        mx_feature=yaml.safe_load(open('params.yaml','r'))['features_engineerig']['max_features']
         return mx_feature
     except Exception as e:
         print(e)
@@ -49,7 +49,7 @@ def apply_bow(x_train,x_test,y_train,y_test,max_feature):
     try:
         vectorizer = TfidfVectorizer(max_features=max_feature)
         x_train_tfidf = vectorizer.fit_transform(x_train)
-        with open(r'models\vectorizer.pkl', 'wb') as f:
+        with open(os.path.join('models', 'vectorizer.pkl'), 'wb') as f:
             pickle.dump(vectorizer, f)
         
         x_test_tfidf = vectorizer.transform(x_test)
@@ -67,8 +67,8 @@ def apply_bow(x_train,x_test,y_train,y_test,max_feature):
 
 def save_features(train_df,test_df):
     try:
-        train_df.to_csv(os.path.join(r'data\features_store','training_feature.csv'),index=False)
-        test_df.to_csv(os.path.join(r'data\features_store','testing_feature.csv'),index=False)
+        train_df.to_csv(os.path.join('data', 'features_store', 'training_feature.csv'),index=False)
+        test_df.to_csv(os.path.join('data', 'features_store', 'testing_feature.csv'),index=False)
 
     except Exception as e:
         print("features not saved")
@@ -78,8 +78,8 @@ def save_features(train_df,test_df):
 
 def main():
     try:
-        train_processed_path=r'data\processed\train_processed.csv'
-        test_processed_path=r'data\processed\test_processed.csv'
+        train_processed_path=os.path.join('data', 'processed', 'train_processed.csv')
+        test_processed_path=os.path.join('data', 'processed', 'test_processed.csv')
         train_data,test_data=load_processed_data(train_processed_path,test_processed_path)
         x_train,x_test ,y_train,y_test=convert_array(train_data,test_data)
         
