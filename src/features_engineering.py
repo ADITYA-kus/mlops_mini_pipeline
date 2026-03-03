@@ -9,7 +9,7 @@ import yaml
 
 def load_yaml():
     try:
-        mx_feature=yaml.safe_load(open('params.yaml','r'))['features_engineerig']['max_features']
+        mx_feature=yaml.safe_load(open('params.yaml','r'))['features_engineering']['max_features']
         return mx_feature
     except Exception as e:
         print(e)
