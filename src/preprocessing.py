@@ -120,8 +120,10 @@ def normalize_text(df):
         raise
 def save_processed_data(train_processed_data,test_processed_data):
      try:
-         train_processed_data.to_csv(os.path.join('data', 'processed', 'train_processed.csv'),index=False)
-         test_processed_data.to_csv(os.path.join('data', 'processed', 'test_processed.csv'),index=False)
+         processed_dir = os.path.join('data', 'processed')
+         os.makedirs(processed_dir, exist_ok=True)
+         train_processed_data.to_csv(os.path.join(processed_dir, 'train_processed.csv'),index=False)
+         test_processed_data.to_csv(os.path.join(processed_dir, 'test_processed.csv'),index=False)
          print("processed data saved successfully")
 
      except:

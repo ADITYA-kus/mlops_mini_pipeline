@@ -39,7 +39,9 @@ def basic_data_process(raw_data):
    
 def save_external_data(final_df):
     try:
-      final_df.to_csv(os.path.join('data', 'external', 'external_data.csv'))
+      external_dir = os.path.join('data', 'external')
+      os.makedirs(external_dir, exist_ok=True)
+      final_df.to_csv(os.path.join(external_dir, 'external_data.csv'))
     except Exception as e:
       print(f"an unexpected error occured during external data saving")
       print(e)
@@ -48,8 +50,10 @@ def save_external_data(final_df):
 
 def save_data(train_df,test_df):
     try:
-      train_df.to_csv(os.path.join('data', 'raw', 'train_df.csv'),index=False)
-      test_df.to_csv(os.path.join('data', 'raw', 'test_df.csv'),index=False)
+      raw_dir = os.path.join('data', 'raw')
+      os.makedirs(raw_dir, exist_ok=True)
+      train_df.to_csv(os.path.join(raw_dir, 'train_df.csv'),index=False)
+      test_df.to_csv(os.path.join(raw_dir, 'test_df.csv'),index=False)
     except Exception as e:
       print('An unexcepted error occured during train test data saving in raw file')
       print(e)

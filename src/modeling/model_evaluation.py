@@ -60,6 +60,9 @@ def main():
         metrics_path = os.path.join('src', 'modeling', 'metrics.json')
         PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
         model_info_path = os.path.join(PROJECT_ROOT, "reports", "experiment_info.json")
+        
+        # Ensure reports directory exists
+        os.makedirs(os.path.join(PROJECT_ROOT, "reports"), exist_ok=True)
         # Load model + data
         clf = load_model(model_path)
         test_data = load_data(test_features_path)

@@ -49,7 +49,10 @@ def apply_bow(x_train,x_test,y_train,y_test,max_feature):
     try:
         vectorizer = TfidfVectorizer(max_features=max_feature)
         x_train_tfidf = vectorizer.fit_transform(x_train)
-        with open(os.path.join('models', 'vectorizer.pkl'), 'wb') as f:
+        
+        models_dir = 'models'
+        os.makedirs(models_dir, exist_ok=True)
+        with open(os.path.join(models_dir, 'vectorizer.pkl'), 'wb') as f:
             pickle.dump(vectorizer, f)
         
         x_test_tfidf = vectorizer.transform(x_test)
@@ -67,8 +70,10 @@ def apply_bow(x_train,x_test,y_train,y_test,max_feature):
 
 def save_features(train_df,test_df):
     try:
-        train_df.to_csv(os.path.join('data', 'features_store', 'training_feature.csv'),index=False)
-        test_df.to_csv(os.path.join('data', 'features_store', 'testing_feature.csv'),index=False)
+        features_dir = os.path.join('data', 'features_store')
+        os.makedirs(features_dir, exist_ok=True)
+        train_df.to_csv(os.path.join(features_dir, 'training_feature.csv'),index=False)
+        test_df.to_csv(os.path.join(features_dir, 'testing_feature.csv'),index=False)
 
     except Exception as e:
         print("features not saved")
