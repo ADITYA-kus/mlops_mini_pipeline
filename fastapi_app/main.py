@@ -14,6 +14,7 @@ import dagshub
 import nltk
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer 
+import os
 nltk.download('stopwords')
 nltk.download('wordnet')    
 dagshub_token=os.getenv("DVCS3MLFLOW")
@@ -23,7 +24,7 @@ os.environ["MLFLOW_TRACKING_PASSWORD"] = dagshub_token
 mlflow.set_tracking_uri("https://dagshub.com/ADITYA-kus/mlops_mini_pipeline.mlflow/")
 
 
-mlflow.set_tracking_uri("https://dagshub.com/ADITYA-kus/mlops_mini_pipeline.mlflow/")
+
 
 
 
@@ -104,7 +105,7 @@ def normalized_text(text):
 
 
 
-templates=Jinja2Templates(directory="fastapi_app/templates")
+templates = Jinja2Templates(directory="templates")
 
 
 
@@ -154,12 +155,13 @@ model = mlflow.pyfunc.load_model(model_uri)
 
 
 
-import os
+
 
 
 base_dir = os.path.dirname(os.path.abspath(__file__))   # current script folder
 parent_dir = os.path.dirname(base_dir)                  # go up one level
-file_path = os.path.join(parent_dir, "models", "vectorizer.pkl")
+file_path = os.path.join( "models", "vectorizer.pkl")
+
 try:
 
     with open(file_path,'rb') as f:
@@ -192,10 +194,4 @@ def predict_sentiment(request:Request, text: str = Form(...)):
 
 
 
-
-
-
-# if __name__ == '__main__':
-#     import uvicorn
-#     uvicorn.run(app, host='0.0.0.0', port=8000)
 
