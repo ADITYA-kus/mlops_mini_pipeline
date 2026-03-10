@@ -1,61 +1,38 @@
-# ci_dvc
+# MLOps Mini Pipeline
 
-<a target="_blank" href="https://cookiecutter-data-science.drivendata.org/">
-    <img src="https://img.shields.io/badge/CCDS-Project%20template-328F97?logo=cookiecutter" />
-</a>
+This repository contains a small **MLOps learning project** where I built a simple end-to-end machine learning pipeline to understand how modern ML systems are developed and deployed.
 
-learning ci inntegration in ml pipeline
+The goal of this project is **not to build a production system**, but to practice important MLOps concepts such as experiment tracking, CI pipelines, containerization, and model deployment.
 
-## Project Organization
+## What this project demonstrates
 
-```
-├── LICENSE            <- Open-source license if one is chosen
-├── Makefile           <- Makefile with convenience commands like `make data` or `make train`
-├── README.md          <- The top-level README for developers using this project.
-├── data
-│   ├── external       <- Data from third party sources.
-│   ├── interim        <- Intermediate data that has been transformed.
-│   ├── processed      <- The final, canonical data sets for modeling.
-│   └── raw            <- The original, immutable data dump.
-│
-├── docs               <- A default mkdocs project; see www.mkdocs.org for details
-│
-├── models             <- Trained and serialized models, model predictions, or model summaries
-│
-├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
-│                         the creator's initials, and a short `-` delimited description, e.g.
-│                         `1.0-jqp-initial-data-exploration`.
-│
-├── pyproject.toml     <- Project configuration file with package metadata for 
-│                         src and configuration for tools like black
-│
-├── references         <- Data dictionaries, manuals, and all other explanatory materials.
-│
-├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
-│   └── figures        <- Generated graphics and figures to be used in reporting
-│
-├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
-│                         generated with `pip freeze > requirements.txt`
-│
-├── setup.cfg          <- Configuration file for flake8
-│
-└── src   <- Source code for use in this project.
-    │
-    ├── __init__.py             <- Makes src a Python module
-    │
-    ├── config.py               <- Store useful variables and configuration
-    │
-    ├── dataset.py              <- Scripts to download or generate data
-    │
-    ├── features.py             <- Code to create features for modeling
-    │
-    ├── modeling                
-    │   ├── __init__.py 
-    │   ├── predict.py          <- Code to run model inference with trained models          
-    │   └── train.py            <- Code to train models
-    │
-    └── plots.py                <- Code to create visualizations
-```
+- Basic ML pipeline for training and evaluation
+- Experiment tracking using **MLflow**
+- CI pipeline using **GitHub Actions**
+- Containerization using **Docker**
+- Model serving using **FastAPI**
+- Image publishing to **Docker Hub**
+- Deployment of the container on **AWS EC2**
 
---------
+## Project Workflow
 
+1. Data preprocessing and feature generation  
+2. Model training and evaluation  
+3. Experiment logging with MLflow  
+4. CI pipeline runs tests and builds Docker image  
+5. Docker image is pushed to Docker Hub  
+6. The container can be deployed on AWS EC2 for inference
+
+## Technologies Used
+
+- Python
+- FastAPI
+- MLflow
+- Docker
+- GitHub Actions
+- AWS EC2
+- DVC (optional depending on your pipeline)
+
+## Purpose
+
+This project was created to learn practical **MLOps tools and workflows** used in industry. It helped me understand how machine learning models move from experimentation to deployment.
