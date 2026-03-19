@@ -65,5 +65,25 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/emotion_prediction:latest
+
+      - name: configure ssh
+        if : ${{ success() }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/NETWORK1_INSTANCE_KEY.pem
+          chmod 600 ~/.ssh/NETWORK1_INSTANCE_KEY.pem
+          ssh-keyscan -H ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts
+      - name: Deploy to server
+        if: ${{ success() }}
+        run: |
+          ssh -i ~/.ssh/NETWORK1_INSTANCE_KEY.pem ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} \
+          "docker pull ${{ secrets.DOCKER_USERNAME }}/emotion_prediction:latest && \
+          docker stop emotion_prediction || true && \
+          docker rm emotion_prediction || true && \
+          docker run -d --name emotion_prediction \
+          -p 8000:8000 \
+          -e DVCS3MLFLOW=${{ secrets.DVCS3MLFLOW }} \
+          --restart unless-stopped \
+          ${{ secrets.DOCKER_USERNAME }}/emotion_prediction:latest"
           
 
